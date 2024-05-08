@@ -1,0 +1,15 @@
+{
+  "name": "@tasker/sources",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.14"
+  },
+  "packageManager": "pnpm@^8.15.0",
+  "engines": {
+    "node": ">=20"
+  }
+}
