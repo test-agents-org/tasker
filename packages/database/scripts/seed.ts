@@ -7,7 +7,7 @@ const db = new PrismaClient();
 async function main() {
   console.log('Seeding data...');
 
-  const engTeam = await db.team.upsert({
+  const engProj = await db.project.upsert({
     where: { slug: 'ENG' },
     update: {},
     create: {
@@ -16,7 +16,7 @@ async function main() {
     },
   });
 
-  const uxTeam = await db.team.upsert({
+  const uxProj = await db.project.upsert({
     where: { slug: 'UX' },
     update: {},
     create: {
@@ -31,7 +31,6 @@ async function main() {
     create: {
       email: 'alice@tasker.io',
       name: 'Alice Chen',
-      teamId: engTeam.id,
       password: '123456',
       avatarBase64: aliceAvatar,
     },
@@ -43,7 +42,6 @@ async function main() {
     create: {
       email: 'bob@tasker.io',
       name: 'Bob Smith',
-      teamId: uxTeam.id,
       password: '123456',
       avatarBase64: bobAvatar,
     },
@@ -58,7 +56,7 @@ async function main() {
       createdAt: subDays(new Date(), 13),
       dueAt: addDays(new Date(), 4),
       status: 'backlog',
-      teamId: uxTeam.id,
+      projectId: uxProj.id,
       userId: bob.id,
     },
   });
@@ -72,7 +70,7 @@ async function main() {
       createdAt: subDays(new Date(), 5),
       dueAt: addDays(new Date(), 8),
       status: 'backlog',
-      teamId: uxTeam.id,
+      projectId: uxProj.id,
       userId: bob.id,
     },
   });
@@ -86,7 +84,7 @@ async function main() {
       createdAt: subDays(new Date(), 5),
       dueAt: addDays(new Date(), 1),
       status: 'backlog',
-      teamId: engTeam.id,
+      projectId: engProj.id,
       userId: bob.id,
     },
   });
@@ -100,7 +98,7 @@ async function main() {
       createdAt: subDays(new Date(), 14),
       dueAt: addDays(new Date(), 0),
       status: 'backlog',
-      teamId: engTeam.id,
+      projectId: engProj.id,
       userId: alice.id,
     },
   });

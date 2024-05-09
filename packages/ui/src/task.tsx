@@ -1,14 +1,13 @@
 import { formatRelative } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import type { Task } from '@tasker/database/model';
-import { PlusIcon } from '@heroicons/react/24/solid';
 
 const formatRelativeLocale = {
   lastWeek: 'dd/MM/yyyy',
   yesterday: "'yesterday'",
   today: "'today'",
   tomorrow: "'tomorrow'",
-  nextWeek: 'dd/MM/yyyy',
+  nextWeek: "'next week'",
   other: 'dd/MM/yyyy',
 };
 
@@ -39,25 +38,19 @@ export function TaskItem({ task }: TaskProps) {
         <TaskIndicator task={task} />
         {task.title}
       </div>
-      <span className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
-        Due{' '}
-        {formatRelative(task.dueAt, new Date(), {
-          locale,
-        })}
-      </span>
+      {task.dueAt && (
+        <span className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
+          Due{' '}
+          {formatRelative(task.dueAt, new Date(), {
+            locale,
+          })}
+        </span>
+      )}
     </div>
   );
 }
 
-interface CreateTaskButtonProps {}
-
-export function CreateTaskButton(props: CreateTaskButtonProps) {
-  return (
-    <div className="fixed bottom-6 right-6">
-      <button className="inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-        <PlusIcon className="mr-2 h-4 w-4" />
-        New Task
-      </button>
-    </div>
-  );
-}
+export {
+  type CreateTaskData,
+  CreateTaskButton,
+} from './lib/create-task-button';

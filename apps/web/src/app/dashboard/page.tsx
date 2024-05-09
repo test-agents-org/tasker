@@ -15,9 +15,8 @@ import { CreateTaskButton } from '@tasker/ui/task';
 export default async function Page(req: NextRequest): Promise<JSX.Element> {
   const cookieStore = cookies();
   const userData = getUserData(cookieStore);
-  const members = await db.user.findMany({
-    include: { team: true },
-  });
+  const members = await db.user.findMany();
+  const projects = await db.project.findMany();
   const assignedTaskIds = (
     await db.assigneesOnTasks.findMany({
       where: {
@@ -52,7 +51,7 @@ export default async function Page(req: NextRequest): Promise<JSX.Element> {
           </div>
         </main>
       </div>
-      <CreateTaskButton />
+      <CreateTaskButton projects={projects} members={members} me={userData} />
     </div>
   );
 }

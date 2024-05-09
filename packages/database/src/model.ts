@@ -2,12 +2,12 @@ import type {
   Prisma,
   User,
   Task,
-  Team,
+  Project,
   AssigneesOnTasks,
 } from '@prisma/client';
+//
+// export type TaskWithProject = Prisma.TaskGetPayload<{
+//   include: {};
+// }>;
 
-export type UserWithTeam = Prisma.UserGetPayload<{
-  include: { team: true };
-}>;
-
-export { User, Task, Team, AssigneesOnTasks };
+export { User, Task, Project, AssigneesOnTasks };

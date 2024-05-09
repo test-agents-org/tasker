@@ -1,15 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { PowerIcon } from '@heroicons/react/24/outline';
 
 export function AuthLink() {
-  const router = useRouter();
   const handleLogout = async () => {
     await fetch(`/api/auth`, {
       method: 'DELETE',
     });
-    router.push('/login');
+    window.location.assign('/login');
   };
   return (
     <>

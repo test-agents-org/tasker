@@ -29,7 +29,7 @@ export default function Login(): JSX.Element {
       if (res.status >= 400) {
         setFailed(true);
       } else {
-        toast.success('Signed in successfully');
+        toast.success('Successfully signed in');
         router.replace('/dashboard');
       }
     } catch (err) {
