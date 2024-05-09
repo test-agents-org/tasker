@@ -2,6 +2,11 @@
   "name": "@tasker/database",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "seed": "ts-node scripts/seed.ts",
+    "format": "prisma format",
+    "db:push": "prisma db push"
+  },
   "exports": {
     ".": "./src/db.ts"
   },
@@ -10,6 +15,7 @@
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
+    "@types/node": "^20.12.11",
     "prisma": "^5.13.0"
   }
 }
