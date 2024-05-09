@@ -16,12 +16,11 @@ export async function POST(req: Request) {
   }
 
   try {
-    const { name } = await db.user.findUniqueOrThrow({
+    const { id, name } = await db.user.findUniqueOrThrow({
       where: { email, password },
     });
-    console.log('Found', name, email);
     const res = NextResponse.json({ success: true });
-    return setUserCookie({ email, name }, res);
+    return setUserCookie({ id, email, name }, res);
   } catch {
     return NextResponse.json(
       { success: false },

@@ -14,7 +14,7 @@ model Task {
   content          String?
   createdAt        DateTime           @default(now())
   dueAt            DateTime           @default(now())
-  done             Boolean            @default(false)
+  status           String             @default("backlog")
   Team             Team?              @relation(fields: [teamId], references: [id])
   teamId           Int?
   User             User?              @relation(fields: [userId], references: [id])
@@ -26,10 +26,11 @@ model User {
   id               Int                @id @default(autoincrement())
   name             String
   email            String             @unique
-  password         String            // super secure plain-text password
+  password         String // super secure plain-text password
   team             Team               @relation(fields: [teamId], references: [id])
   teamId           Int
   tasks            Task[]
+  avatarBase64     String
   AssigneesOnTasks AssigneesOnTasks[]
 }
 

@@ -1,15 +1,32 @@
 import React, { JSX } from 'react';
+import { cookies } from 'next/headers';
 import { Sidebar } from '@tasker/sidebar';
 import { CreatedTasks, MyTasks } from '@tasker/tasks-widgets';
+import { db } from '@tasker/database';
 import { getUserData } from '../api/auth/utils';
-import type { NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
+import { CreateTaskButton } from '@tasker/ui/task';
 
 export const revalidate = 0;
 
-export default async function Tasks(req: NextRequest): Promise<JSX.Element> {
+export default async function Tasks(): Promise<JSX.Element> {
   const cookieStore = cookies();
   const userData = getUserData(cookieStore);
+  const myTasks = (
+    await db.assigneesOnTasks.findMany({
+      where: {
+        assigneeId: userData.id,
+      },
+      include: {
+        task: true,
+      },
+    })
+  ).map((x) => x.task);
+  const createdTasks = await db.task.findMany({
+    where: {
+      userId: userData.id,
+    },
+  });
+  console.log({ createdTasks });
   return (
     <div className="flex h-screen w-full">
       <div className="flex w-64 flex-col items-start justify-between border-r bg-white p-8">
@@ -18,13 +35,14 @@ export default async function Tasks(req: NextRequest): Promise<JSX.Element> {
       <div className="w-full p-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
           <div className="bg-white text-gray-900">
-            <MyTasks />
+            <MyTasks tasks={myTasks} />
           </div>
           <div className="bg-white text-gray-900">
-            <CreatedTasks />
+            <CreatedTasks tasks={createdTasks} />
           </div>
         </div>
       </div>
+      <CreateTaskButton />
     </div>
   );
 }

@@ -17,9 +17,9 @@ export function getUserData(store: ReturnType<typeof cookies>) {
   if (!token) throw new AuthError('Missing user token');
   try {
     const verified = decodeJwt(token);
-    return verified as Pick<User, 'email' | 'name'>;
+    return verified as Pick<User, 'email' | 'name' | 'id'>;
   } catch (err) {
-    return null;
+    throw new AuthError('Could not find user in session.');
   }
 }
 
@@ -33,14 +33,14 @@ export async function verifyAuth(req: NextRequest) {
       token,
       new TextEncoder().encode(JWT_SECRET_KEY),
     );
-    return verified.payload as Pick<User, 'email' | 'name'>;
+    return verified.payload as Pick<User, 'email' | 'name' | 'id'>;
   } catch (err) {
     throw new AuthError('Your token has expired.');
   }
 }
 
 export async function setUserCookie(
-  user: Pick<User, 'email' | 'name'>,
+  user: Pick<User, 'email' | 'name' | 'id'>,
   res: NextResponse,
 ) {
   const token = await new SignJWT(user)

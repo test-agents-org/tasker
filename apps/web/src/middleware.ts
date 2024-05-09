@@ -23,8 +23,6 @@ export async function middleware(req: NextRequest) {
     // otherwise, redirect to the set token page
     else {
       const h = headers();
-
-      console.log(h);
       const host = h.get('x-forwarded-host') as string;
       const proto = h.get('x-forwarded-proto') as string;
       return NextResponse.redirect(`${proto}://${host}/login`);

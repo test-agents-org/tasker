@@ -1,4 +1,6 @@
+const { addDays, subDays } = require('date-fns');
 const { PrismaClient } = require('@prisma/client');
+const { aliceAvatar, bobAvatar } = require('./_seed.data');
 
 const db = new PrismaClient();
 
@@ -28,9 +30,10 @@ async function main() {
     update: {},
     create: {
       email: 'alice@tasker.io',
-      name: 'Alice',
+      name: 'Alice Chen',
       teamId: engTeam.id,
       password: '123456',
+      avatarBase64: aliceAvatar,
     },
   });
 
@@ -39,9 +42,10 @@ async function main() {
     update: {},
     create: {
       email: 'bob@tasker.io',
-      name: 'Bob',
+      name: 'Bob Smith',
       teamId: uxTeam.id,
       password: '123456',
+      avatarBase64: bobAvatar,
     },
   });
 
@@ -51,9 +55,9 @@ async function main() {
     create: {
       slug: 'UX-1',
       title: 'Wireframing',
-      createdAt: new Date(),
-      dueAt: new Date(),
-      done: false,
+      createdAt: subDays(new Date(), 13),
+      dueAt: addDays(new Date(), 4),
+      status: 'backlog',
       teamId: uxTeam.id,
       userId: bob.id,
     },
@@ -65,9 +69,9 @@ async function main() {
     create: {
       slug: 'UX-2',
       title: 'Customer Journey Mapping',
-      createdAt: new Date(),
-      dueAt: new Date(),
-      done: false,
+      createdAt: subDays(new Date(), 5),
+      dueAt: addDays(new Date(), 8),
+      status: 'backlog',
       teamId: uxTeam.id,
       userId: bob.id,
     },
@@ -79,9 +83,9 @@ async function main() {
     create: {
       slug: 'ENG-1',
       title: 'Landing page',
-      createdAt: new Date(),
-      dueAt: new Date(),
-      done: false,
+      createdAt: subDays(new Date(), 5),
+      dueAt: addDays(new Date(), 1),
+      status: 'backlog',
       teamId: engTeam.id,
       userId: bob.id,
     },
@@ -93,8 +97,9 @@ async function main() {
     create: {
       slug: 'ENG-2',
       title: 'Secondary page',
-      createdAt: new Date(),
-      done: false,
+      createdAt: subDays(new Date(), 14),
+      dueAt: addDays(new Date(), 0),
+      status: 'backlog',
       teamId: engTeam.id,
       userId: alice.id,
     },
