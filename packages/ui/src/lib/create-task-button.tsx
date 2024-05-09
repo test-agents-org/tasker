@@ -81,6 +81,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
     <>
       <div className="fixed bottom-6 right-6">
         <button
+          data-testid="create-task-button"
           className="inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           onClick={open}
         >
@@ -110,6 +111,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                     New task
                   </DialogTitle>
                   <form
+                    data-testid="create-task-form"
                     className="mt-2 text-sm/6 text-black/50"
                     onSubmit={handleSubmit}
                   >
@@ -120,6 +122,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                       <input
                         data-autofocus
                         className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:focus:ring-gray-600"
+                        data-testid="create-task-input-title"
                         id="title"
                         placeholder="Do something..."
                         required
@@ -135,6 +138,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                       </label>
                       <textarea
                         className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:focus:ring-gray-600"
+                        data-testid="create-task-input-description"
                         id="description"
                         rows={10}
                         required
@@ -150,6 +154,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                       <Select
                         required
                         id="project"
+                        data-testid="create-task-input-project"
                         className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       >
                         {props.projects.map((p) => (
@@ -168,6 +173,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                       </label>
                       <Select
                         required
+                        data-testid="create-task-input-assignee"
                         id="assignee"
                         className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       >
@@ -184,18 +190,21 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                       </label>
                       <input
                         className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        data-testid="create-task-input-dueAt"
                         id="dueAt"
                         type="date"
                       />
                     </div>
                     <div className="mt-4 flex items-center justify-end gap-4">
                       <Button
+                        data-testid="create-task-submit"
                         type="submit"
                         className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2  data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
                       >
                         Create
                       </Button>
                       <Button
+                        data-testid="create-task-cancel"
                         className="order-first text-sm text-gray-500"
                         onClick={close}
                       >

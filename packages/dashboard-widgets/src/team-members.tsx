@@ -2,6 +2,7 @@ import { User } from '@tasker/database/model';
 
 interface TeamMembersProps {
   members: User[];
+  me: { id: number };
 }
 
 export function TeamMembers(props: TeamMembersProps) {
@@ -11,7 +12,7 @@ export function TeamMembers(props: TeamMembersProps) {
       <p className="mb-4 text-sm text-gray-500">Active team members</p>
       <div className="grid gap-4">
         {props.members.map((m) => (
-          <div className="flex items-center justify-between">
+          <div key={m.id} className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="relative">
                 <img
@@ -27,7 +28,7 @@ export function TeamMembers(props: TeamMembersProps) {
                 />
               </div>
               <span className="text-sm font-medium text-gray-600">
-                {m.name}
+                {m.name} {props.me.id === m.id ? <span>(You)</span> : null}
               </span>
             </div>
           </div>

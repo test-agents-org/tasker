@@ -45,7 +45,7 @@ export function ProjectDetails({
       <h3 className="my-4">Tasks</h3>
       <div className="flex flex-col gap-4">
         {tasks.map((t) => (
-          <TaskItem task={t} />
+          <TaskItem key={t.id} task={t} />
         ))}
       </div>
     </>

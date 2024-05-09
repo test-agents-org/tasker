@@ -17,7 +17,7 @@ export function ProjectsStatuses({
       </p>
       <div className="grid gap-4">
         {projects.map((p: ProjectWithTasks) => (
-          <ProjectItem project={p} />
+          <ProjectItem key={p.id} project={p} />
         ))}
       </div>
     </>

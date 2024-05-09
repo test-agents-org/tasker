@@ -12,7 +12,7 @@ export function AuthLink() {
   return (
     <>
       <PowerIcon className="mr-2 h-5 w-5 text-gray-600" />
-      <button className="" onClick={handleLogout}>
+      <button data-testid="logout" onClick={handleLogout}>
         Logout
       </button>
     </>

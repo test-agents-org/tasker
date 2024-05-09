@@ -1,19 +1,13 @@
 import Link from 'next/link';
 import {
-  HomeIcon,
-  PowerIcon,
   FolderIcon,
+  HomeIcon,
   ListBulletIcon,
   Squares2X2Icon,
-  UsersIcon,
 } from '@heroicons/react/24/outline';
 import { AuthLink } from './auth-link';
 
-interface SidebarProps {
-  user: null | { name: string; email: string };
-}
-
-export function Sidebar(props: SidebarProps) {
+export function Sidebar() {
   return (
     <div className="flex h-full w-full flex-col">
       <Link
@@ -26,6 +20,7 @@ export function Sidebar(props: SidebarProps) {
       <nav className="flex-1">
         <Link
           className="flex items-center gap-2 rounded-md py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
+          data-testid="nav-link-dashboard"
           href="/"
         >
           <HomeIcon className="h-5 w-5 text-gray-600" />
@@ -33,6 +28,7 @@ export function Sidebar(props: SidebarProps) {
         </Link>
         <Link
           className="flex items-center gap-2 rounded-md py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
+          data-testid="nav-link-tasks"
           href="/tasks"
         >
           <ListBulletIcon className="h-5 w-5 text-gray-600" />
@@ -40,6 +36,7 @@ export function Sidebar(props: SidebarProps) {
         </Link>
         <Link
           className="flex items-center gap-2 rounded-md py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
+          data-testid="nav-link-projects"
           href="/projects"
         >
           <FolderIcon className="h-5 w-5 text-gray-600" />

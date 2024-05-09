@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "seed": "ts-node scripts/seed.ts",
     "format": "prisma format",
-    "db:push": "prisma db push"
+    "reset": "prisma db push --force-reset && prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node scripts/seed.ts"
   },
   "exports": {
     ".": "./src/db.ts",

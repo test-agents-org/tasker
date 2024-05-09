@@ -17,9 +17,9 @@ export default async function TaskLayout({
   return (
     <div className="flex h-screen w-full">
       <div className="flex w-64 flex-col items-start justify-between border-r bg-white p-8">
-        <Sidebar user={userData} />
+        <Sidebar />
       </div>
-      <div className="w-full p-8">{children}</div>
+      <div className="w-full max-w-screen-lg p-8">{children}</div>
       <CreateTaskButton projects={projects} members={members} me={userData} />
     </div>
   );

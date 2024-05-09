@@ -8,11 +8,14 @@ import {
 import { Sidebar } from '@tasker/sidebar';
 import { getUserData } from '../api/auth/utils';
 import { cookies } from 'next/headers';
-import type { NextRequest } from 'next/server';
 import { db } from '@tasker/database';
 import { CreateTaskButton } from '@tasker/ui/task';
 
-export default async function Page(req: NextRequest): Promise<JSX.Element> {
+export const metadata = {
+  title: 'Dashboard | Tasker',
+};
+
+export default async function Page(): Promise<JSX.Element> {
   const cookieStore = cookies();
   const userData = getUserData(cookieStore);
   const members = await db.user.findMany();
@@ -37,9 +40,9 @@ export default async function Page(req: NextRequest): Promise<JSX.Element> {
   return (
     <div className="flex h-screen w-full">
       <div className="flex w-64 flex-col items-start justify-between border-r bg-white p-8">
-        <Sidebar user={userData} />
+        <Sidebar />
       </div>
-      <div className="w-full p-8">
+      <div className="w-full max-w-screen-lg p-8">
         <main className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           <div className="bg-white text-gray-900">
             <UpcomingTasks tasks={tasks} />
@@ -51,7 +54,7 @@ export default async function Page(req: NextRequest): Promise<JSX.Element> {
             <ProjectsStatuses projects={projects} />
           </div>
           <div className="bg-white text-gray-900">
-            <TeamMembers members={members} />
+            <TeamMembers members={members} me={userData} />
           </div>
         </main>
       </div>

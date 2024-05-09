@@ -30,7 +30,7 @@ export default function Login(): JSX.Element {
         setFailed(true);
       } else {
         toast.success('Successfully signed in');
-        router.replace('/dashboard');
+        window.location.replace('/dashboard');
       }
     } catch (err) {
       console.error(err);
@@ -55,6 +55,7 @@ export default function Login(): JSX.Element {
             <input
               autoFocus
               className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:focus:ring-gray-600"
+              data-testid="email"
               id="email"
               placeholder="user@example.com"
               required
@@ -69,17 +70,22 @@ export default function Login(): JSX.Element {
             </div>
             <input
               className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:focus:ring-gray-600"
+              data-testid="password"
               id="password"
               required
               type="password"
             />
           </div>
           {failed ? (
-            <div className="text-sm font-medium text-red-500">
+            <div
+              className="text-sm font-medium text-red-500"
+              data-testid="error"
+            >
               Incorrect email or password. Please try again.
             </div>
           ) : null}
           <button
+            data-testid="submit"
             className="w-full rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-100 dark:focus:ring-offset-gray-950"
             type="submit"
           >
