@@ -2,6 +2,7 @@ import { db } from '@tasker/database';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { getUserData } from '../auth/utils';
+import { parse } from 'date-fns';
 
 export async function POST(req: Request) {
   const me = getUserData(cookies());
@@ -15,7 +16,9 @@ export async function POST(req: Request) {
       userId: me.id,
       status: 'backlog',
       createdAt: new Date(),
-      dueAt: data.dueAt ? new Date(data.dueAt) : undefined,
+      dueAt: data.dueAt
+        ? parse(data.dueAt, 'yyyy-MM-dd', new Date())
+        : undefined,
       projectId: data.projectId,
       title: data.title,
       description: data.description,
