@@ -21,7 +21,7 @@ export async function PUT(
       AssigneesOnTasks: true,
     },
   });
-  if (assigneeId) {
+  if (task.AssigneesOnTasks[0]) {
     await db.assigneesOnTasks.delete({
       where: {
         taskId_assigneeId: {
@@ -30,6 +30,8 @@ export async function PUT(
         },
       },
     });
+  }
+  if (assigneeId) {
     await db.assigneesOnTasks.create({
       data: {
         taskId: task.id,

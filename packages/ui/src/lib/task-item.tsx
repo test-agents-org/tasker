@@ -42,6 +42,8 @@ export function TaskItem({ task }: TaskProps) {
         <TaskIndicator task={task} />
         {task.title}
       </div>
+      <div className="flex-1">
+      </div>
       {task.dueAt && (
         <span className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
           Due{' '}

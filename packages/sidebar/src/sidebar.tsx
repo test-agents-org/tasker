@@ -40,18 +40,18 @@ export function Sidebar(props: SidebarProps) {
         </Link>
         <Link
           className="flex items-center gap-2 rounded-md py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
-          href="#"
+          href="/projects"
         >
           <FolderIcon className="h-5 w-5 text-gray-600" />
           Projects
         </Link>
-        <Link
-          className="flex items-center gap-2 rounded-md py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
-          href="#"
-        >
-          <UsersIcon className="h-5 w-5 text-gray-600" />
-          Team
-        </Link>
+        {/*<Link*/}
+        {/*  className="flex items-center gap-2 rounded-md py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"*/}
+        {/*  href="#"*/}
+        {/*>*/}
+        {/*  <UsersIcon className="h-5 w-5 text-gray-600" />*/}
+        {/*  Team*/}
+        {/*</Link>*/}
       </nav>
       <div className="flex items-center self-center text-center">
         <AuthLink />

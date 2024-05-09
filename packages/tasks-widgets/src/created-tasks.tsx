@@ -9,8 +9,8 @@ interface CreatedTasksProps {
 export function CreatedTasks(props: CreatedTasksProps) {
   return (
     <>
-      <h3 className="text-lg font-semibold">My Created Tasks</h3>
-      <p className="text-sm text-gray-500">Tasks you have created</p>
+      <h3 className="mb-4 text-lg font-semibold">My Created Tasks</h3>
+      <p className="mb-4 text-sm text-gray-500">Tasks you have created</p>
       <div className="grid gap-4">
         {props.tasks.map((t) => (
           <Link

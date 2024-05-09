@@ -10,8 +10,8 @@ interface UpcomingTasksProps {
 export function UpcomingTasks(props: UpcomingTasksProps) {
   return (
     <>
-      <h3 className="text-lg font-semibold">Upcoming Tasks</h3>
-      <p className="text-sm text-gray-500">Tasks due in the next 7 days</p>
+      <h3 className="mb-4 text-lg font-semibold">Upcoming Tasks</h3>
+      <p className="mb-4 text-sm text-gray-500">Tasks due in the next 7 days</p>
       <div className="grid gap-4">
         {props.tasks.map((t) => (
           <TaskItem key={t.id} task={t} />

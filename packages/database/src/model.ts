@@ -12,4 +12,10 @@ export type TaskWithAssigneesOnTasks = Prisma.TaskGetPayload<{
   };
 }>;
 
+export type ProjectWithTasks = Prisma.ProjectGetPayload<{
+  include: {
+    Task: true;
+  };
+}>;
+
 export { User, Task, Project, AssigneesOnTasks };

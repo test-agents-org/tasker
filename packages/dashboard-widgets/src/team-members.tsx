@@ -7,8 +7,8 @@ interface TeamMembersProps {
 export function TeamMembers(props: TeamMembersProps) {
   return (
     <>
-      <h3 className="text-lg font-semibold">Team Members</h3>
-      <p className="text-sm text-gray-500">Active team members</p>
+      <h3 className="mb-4 text-lg font-semibold">Team Members</h3>
+      <p className="mb-4 text-sm text-gray-500">Active team members</p>
       <div className="grid gap-4">
         {props.members.map((m) => (
           <div className="flex items-center justify-between">

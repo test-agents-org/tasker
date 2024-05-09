@@ -16,7 +16,11 @@ export default async function Page(req: NextRequest): Promise<JSX.Element> {
   const cookieStore = cookies();
   const userData = getUserData(cookieStore);
   const members = await db.user.findMany();
-  const projects = await db.project.findMany();
+  const projects = await db.project.findMany({
+    include: {
+      Task: true,
+    },
+  });
   const assignedTaskIds = (
     await db.assigneesOnTasks.findMany({
       where: {
@@ -44,10 +48,10 @@ export default async function Page(req: NextRequest): Promise<JSX.Element> {
           {/*  <TasksChart />*/}
           {/*</div>*/}
           <div className="bg-white text-gray-900">
-            <ProjectsStatuses />
+            <ProjectsStatuses projects={projects} />
           </div>
           <div className="bg-white text-gray-900">
-            <TeamMembers me={userData} members={members} />
+            <TeamMembers members={members} />
           </div>
         </main>
       </div>

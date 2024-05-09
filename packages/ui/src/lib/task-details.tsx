@@ -102,17 +102,18 @@ export function TaskDetails({ task, members, projects, me }: TaskDetailsProps) {
         <Select
           required
           id="assignee"
-          defaultValue={task.AssigneesOnTasks[0].assigneeId as number}
+          defaultValue={task.AssigneesOnTasks[0]?.assigneeId as number}
           className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           onChange={async (evt: SyntheticEvent<HTMLSelectElement>) => {
             await update({
               id: task.id,
-              assigneeId:
-                parseInt(evt.currentTarget.value) ||
-                task.AssigneesOnTasks[0].assigneeId,
+              assigneeId: evt.currentTarget.value
+                ? parseInt(evt.currentTarget.value)
+                : undefined,
             });
           }}
         >
+          <option value=""></option>
           {members.map((a) => (
             <option key={a.id} value={a.id}>
               {a.name}
