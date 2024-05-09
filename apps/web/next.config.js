@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  transpilePackages: ['@tasker/ui'],
+  async redirects() {
+    return [{ source: '/', destination: '/dashboard', permanent: false }];
+  },
+  transpilePackages: ['@tasker/ui', '@tasker/dashboard-widgets'],
 };

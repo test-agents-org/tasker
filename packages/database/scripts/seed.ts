@@ -30,6 +30,7 @@ async function main() {
       email: 'alice@tasker.io',
       name: 'Alice',
       teamId: engTeam.id,
+      password: '123456',
     },
   });
 
@@ -40,6 +41,7 @@ async function main() {
       email: 'bob@tasker.io',
       name: 'Bob',
       teamId: uxTeam.id,
+      password: '123456',
     },
   });
 

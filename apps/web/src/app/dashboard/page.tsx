@@ -1,13 +1,15 @@
-import React, { JSX } from 'react';
+import { JSX } from 'react';
+import {
+  ProjectsStatuses,
+  TeamMembers,
+  UpcomingTasks,
+} from '@tasker/dashboard-widgets';
 import { Sidebar } from '@tasker/sidebar';
-import { CreatedTasks, MyTasks } from '@tasker/tasks-widgets';
 import { getUserData } from '../api/auth/utils';
-import type { NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
+import type { NextRequest } from 'next/server';
 
-export const revalidate = 0;
-
-export default async function Tasks(req: NextRequest): Promise<JSX.Element> {
+export default async function Page(req: NextRequest): Promise<JSX.Element> {
   const cookieStore = cookies();
   const userData = getUserData(cookieStore);
   return (
@@ -16,14 +18,20 @@ export default async function Tasks(req: NextRequest): Promise<JSX.Element> {
         <Sidebar user={userData} />
       </div>
       <div className="w-full p-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+        <main className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           <div className="bg-white text-gray-900">
-            <MyTasks />
+            <UpcomingTasks />
+          </div>
+          {/*<div className="bg-white text-gray-900">*/}
+          {/*  <TasksChart />*/}
+          {/*</div>*/}
+          <div className="bg-white text-gray-900">
+            <ProjectsStatuses />
           </div>
           <div className="bg-white text-gray-900">
-            <CreatedTasks />
+            <TeamMembers />
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );
