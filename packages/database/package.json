@@ -1,0 +1,15 @@
+{
+  "name": "@tasker/database",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/db.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.13.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "prisma": "^5.13.0"
+  }
+}

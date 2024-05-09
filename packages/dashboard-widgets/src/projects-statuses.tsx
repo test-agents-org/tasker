@@ -1,3 +1,5 @@
+const a='1'
+
 export function ProjectsStatuses() {
   return (
     <>
