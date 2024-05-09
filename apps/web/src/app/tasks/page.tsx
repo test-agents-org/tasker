@@ -1,0 +1,106 @@
+import type { JSX } from 'react';
+export default async function Tasks(): Promise<JSX.Element> {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="bg-white text-gray-900">
+        <h3 className="text-lg font-semibold">My Tasks</h3>
+        <p className="text-sm text-gray-500">Tasks assigned to you</p>
+        <div className="grid gap-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <input
+                className="h-4 w-4 rounded border-gray-300 text-gray-600 focus:ring-indigo-500"
+                id="task-1"
+                type="checkbox"
+              />
+              <label
+                className="text-sm font-medium text-gray-600"
+                htmlFor="task-1"
+              >
+                Finish design mockups
+              </label>
+            </div>
+            <span className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
+              Due Tomorrow
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <input
+                className="h-4 w-4 rounded border-gray-300 text-gray-600 focus:ring-indigo-500"
+                id="task-2"
+                type="checkbox"
+              />
+              <label
+                className="text-sm font-medium text-gray-600"
+                htmlFor="task-2"
+              >
+                Prepare presentation
+              </label>
+            </div>
+            <span className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
+              Due Friday
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <input
+                className="h-4 w-4 rounded border-gray-300 text-gray-600 focus:ring-indigo-500"
+                id="task-3"
+                type="checkbox"
+              />
+              <label
+                className="text-sm font-medium text-gray-600"
+                htmlFor="task-3"
+              >
+                Review project roadmap
+              </label>
+            </div>
+            <span className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
+              Due Next Week
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white text-gray-900">
+        <h3 className="text-lg font-semibold">My Created Tasks</h3>
+        <p className="text-sm text-gray-500">Tasks you have created</p>
+        <div className="grid gap-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-gray-300" />
+              <span className="text-sm font-medium text-gray-600">
+                Update website copy
+              </span>
+            </div>
+            <span className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
+              Backlog
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-yellow-500" />
+              <span className="text-sm font-medium text-gray-600">
+                Fix mobile app bugs
+              </span>
+            </div>
+            <span className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
+              In Progress
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-green-500" />
+              <span className="text-sm font-medium text-gray-600">
+                Implement new feature
+              </span>
+            </div>
+            <span className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
+              Done
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
