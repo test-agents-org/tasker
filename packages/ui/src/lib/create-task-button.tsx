@@ -36,6 +36,7 @@ interface FormElements extends HTMLFormControlsCollection {
   assignee: HTMLSelectElement;
   dueAt: HTMLInputElement;
 }
+
 interface FormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
@@ -172,8 +173,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                       >
                         {props.members.map((p) => (
                           <option key={p.id} value={p.id}>
-                            {p.name}{' '}
-                            {p.id === props.me.id ? <span>(You)</span> : null}
+                            {p.name}
                           </option>
                         ))}
                       </Select>

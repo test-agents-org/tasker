@@ -9,7 +9,6 @@ export async function POST(req: Request) {
   const project = await db.project.findUniqueOrThrow({
     where: { id: data.projectId },
   });
-  console.log('>>>', data, data.dueAt ? new Date(data.dueAt) : undefined)
 
   let task = await db.task.create({
     data: {

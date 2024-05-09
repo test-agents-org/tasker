@@ -5,9 +5,11 @@ import type {
   Project,
   AssigneesOnTasks,
 } from '@prisma/client';
-//
-// export type TaskWithProject = Prisma.TaskGetPayload<{
-//   include: {};
-// }>;
+
+export type TaskWithAssigneesOnTasks = Prisma.TaskGetPayload<{
+  include: {
+    AssigneesOnTasks: true;
+  };
+}>;
 
 export { User, Task, Project, AssigneesOnTasks };

@@ -1,7 +1,6 @@
 import { User } from '@tasker/database/model';
 
 interface TeamMembersProps {
-  me: { id: number };
   members: User[];
 }
 
@@ -28,7 +27,7 @@ export function TeamMembers(props: TeamMembersProps) {
                 />
               </div>
               <span className="text-sm font-medium text-gray-600">
-                {m.name} {m.id === props.me.id ? <span>(You)</span> : null}
+                {m.name}
               </span>
             </div>
           </div>
