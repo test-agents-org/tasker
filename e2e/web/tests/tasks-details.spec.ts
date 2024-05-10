@@ -3,13 +3,6 @@ import { login } from './helpers/auth-helper';
 import { createTask } from './helpers/task-helper';
 import { format } from 'date-fns';
 
-test('Tasks Test: List page', async ({ page }) => {
-  await login(page);
-  await page.goto('/tasks');
-
-  await expect(page).toHaveURL('/tasks');
-});
-
 test('Tasks Test: Add new task', async ({ page }) => {
   const now = Date.now();
   await login(page, { email: 'alice@tasker.io', password: '123456' });

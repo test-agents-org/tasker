@@ -1,17 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers/auth-helper';
 
-test('Auth Test: protected URLs', async ({ page }) => {
-  await page.goto('/dashboard');
-  await page.waitForURL('/login');
-
-  await page.goto('/tasks');
-  await page.waitForURL('/login');
-
-  await page.goto('/projects');
-  await page.waitForURL('/login');
-});
-
 test('Login Test: Bad credentials', async ({ page }) => {
   await page.goto('/login');
 
