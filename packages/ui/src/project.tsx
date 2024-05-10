@@ -28,7 +28,10 @@ export function ProjectItem({ project }: ProjectItemProps): JSX.Element {
           {project.name}
         </span>
       </div>
-      <span className="rounded-md border border-gray-200 border-gray-300 px-2 py-1 text-xs font-medium text-gray-600 dark:border-gray-800">
+      <span
+        data-testid="project-item-status"
+        className="rounded-md border border-gray-200 border-gray-300 px-2 py-1 text-xs font-medium text-gray-600 dark:border-gray-800"
+      >
         {project.status === 'on_track'
           ? 'On Track'
           : project.status === 'off_track'
