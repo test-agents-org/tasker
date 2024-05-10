@@ -10,7 +10,7 @@ export function TeamMembers(props: TeamMembersProps) {
     <>
       <h3 className="mb-4 text-lg font-semibold">Team Members</h3>
       <p className="mb-4 text-sm text-gray-500">Active team members</p>
-      <div className="grid gap-4">
+      <div className="grid gap-4" data-testid="team-members">
         {props.members.map((m) => (
           <div key={m.id} className="flex items-center justify-between">
             <div className="flex items-center gap-2">

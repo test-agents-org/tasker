@@ -28,3 +28,12 @@ test('Dashboard Test: Add new task', async ({ page }) => {
 
   expect(newTaskCount).toBeGreaterThan(initialTaskCount);
 });
+
+test('Dashboard Test: Team members', async ({ page }) => {
+  await login(page, { email: 'alice@tasker.io', password: '123456' });
+  await page.goto('/dashboard');
+
+  const textContent = await page.textContent('[data-testid=team-members]');
+  expect(textContent).toMatch(/Alice/);
+  expect(textContent).toMatch(/Bob/);
+});

@@ -11,5 +11,7 @@ export async function login(
 
   await page.click('[data-testid=submit]');
 
+  await page.waitForTimeout(10_000);
+
   await page.waitForURL('/dashboard');
 }

@@ -92,6 +92,49 @@ test('Projects Tests: Update project status', async ({ page }) => {
   expect(
     await page.locator('[data-testid=project-input-status]').inputValue(),
   ).toEqual('off_track');
+
+  await setStatus(page, 'on_track');
+
+  await page.waitForTimeout(10_000);
+  await page.reload();
+
+  expect(
+    await page.locator('[data-testid=project-input-status]').inputValue(),
+  ).toEqual('on_track');
+
+  // Checking another project
+  await page.goto('/projects/ENG');
+  // Other project has default status
+  expect(
+    await page.locator('[data-testid=project-input-status]').inputValue(),
+  ).toEqual('on_track');
+
+  await setStatus(page, 'off_track');
+
+  await page.waitForTimeout(10_000);
+  await page.reload();
+
+  expect(
+    await page.locator('[data-testid=project-input-status]').inputValue(),
+  ).toEqual('off_track');
+
+  await setStatus(page, 'at_risk');
+
+  await page.waitForTimeout(10_000);
+  await page.reload();
+
+  expect(
+    await page.locator('[data-testid=project-input-status]').inputValue(),
+  ).toEqual('at_risk');
+
+  await setStatus(page, 'on_track');
+
+  await page.waitForTimeout(10_000);
+  await page.reload();
+
+  expect(
+    await page.locator('[data-testid=project-input-status]').inputValue(),
+  ).toEqual('on_track');
 });
 
 test('Projects Tests: Create task from details page defaults project to current project', async ({
