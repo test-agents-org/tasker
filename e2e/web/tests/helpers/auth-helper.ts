@@ -11,7 +11,5 @@ export async function login(
 
   await page.click('[data-testid=submit]');
 
-  await page.waitForNavigation({
-    url: /dashboard/,
-  });
+  await page.waitForURL('/dashboard');
 }

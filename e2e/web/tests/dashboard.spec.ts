@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test';
 import { login } from './helpers/auth-helper';
-import { waitForToastHidden } from './helpers/toast-helper';
 import { createTask } from './helpers/task-helper';
 
 test('Dashboard Test: Title', async ({ page }) => {
@@ -24,8 +23,6 @@ test('Dashboard Test: Add new task', async ({ page }) => {
     project: 'Engineering',
     assignToMe: true,
   });
-
-  await waitForToastHidden(page);
 
   const newTaskCount = await tasks.count();
 

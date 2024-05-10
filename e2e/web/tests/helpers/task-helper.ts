@@ -68,4 +68,6 @@ export async function createTask(
   while (await form.isVisible()) {
     await page.waitForTimeout(500);
   }
+
+  await page.waitForTimeout(10_000);
 }

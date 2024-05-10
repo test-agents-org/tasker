@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test';
 import { login } from './helpers/auth-helper';
-import { waitForToastHidden } from './helpers/toast-helper';
 import { createTask } from './helpers/task-helper';
 import { format } from 'date-fns';
 
@@ -25,7 +24,6 @@ test('Tasks Test: Add new task', async ({ page }) => {
     project: 'Engineering',
     assignToMe: true,
   });
-
   await createTask(page, {
     title: `Test 2 ${now}`,
     description: `Test ${now}`,
@@ -35,18 +33,39 @@ test('Tasks Test: Add new task', async ({ page }) => {
   await createTask(page, {
     title: `Test 3 ${now}`,
     description: `Test ${now}`,
-    project: 'Design',
+    project: 'Engineering',
     assignToMe: true,
   });
-
   await createTask(page, {
     title: `Test 4 ${now}`,
+    description: `Test ${now}`,
+    project: 'Engineering',
+    assignToMe: true,
+  });
+  await createTask(page, {
+    title: `Test 5 ${now}`,
     description: `Test ${now}`,
     project: 'Design',
     assignToMe: true,
   });
-
-  await waitForToastHidden(page);
+  await createTask(page, {
+    title: `Test 6 ${now}`,
+    description: `Test ${now}`,
+    project: 'Design',
+    assignToMe: true,
+  });
+  await createTask(page, {
+    title: `Test 7 ${now}`,
+    description: `Test ${now}`,
+    project: 'Design',
+    assignToMe: true,
+  });
+  await createTask(page, {
+    title: `Test 8 ${now}`,
+    description: `Test ${now}`,
+    project: 'Design',
+    assignToMe: true,
+  });
 
   const newTaskCount = await tasks.count();
 
@@ -65,13 +84,34 @@ test('Tasks Test: Add new task', async ({ page }) => {
   expect(
     taskItemTextContents.some((s) => s.match(`Test 4 ${now}`)),
   ).toBeTruthy();
+  expect(
+    taskItemTextContents.some((s) => s.match(`Test 5 ${now}`)),
+  ).toBeTruthy();
+  expect(
+    taskItemTextContents.some((s) => s.match(`Test 6 ${now}`)),
+  ).toBeTruthy();
+  expect(
+    taskItemTextContents.some((s) => s.match(`Test 7 ${now}`)),
+  ).toBeTruthy();
+  expect(
+    taskItemTextContents.some((s) => s.match(`Test 8 ${now}`)),
+  ).toBeTruthy();
 });
 
 test('Tasks Tests: Details page editing', async ({ page }) => {
   const now = Date.now();
   await login(page, { email: 'alice@tasker.io', password: '123456' });
 
-  await page.goto('/tasks/UX-1');
+  await page.goto('/tasks');
+
+  await createTask(page);
+
+  // Go to created task
+  const tasks = page.locator('[data-testid=my-tasks] [data-testid=task-item]');
+  const taskCount = await tasks.count();
+  const lastTask = tasks.nth(taskCount - 1);
+  await lastTask.click();
+  await page.waitForTimeout(10_000);
 
   await page.fill('[data-testid=task-input-title]', `New title ${now}`);
   await page.fill(
@@ -84,10 +124,9 @@ test('Tasks Tests: Details page editing', async ({ page }) => {
   );
 
   // Wait for data to update then reload
-  await page.waitForTimeout(20_000);
+  await page.waitForTimeout(10_000);
   await page.reload();
 
-  await page.screenshot({ path: 'test.png' });
   expect(
     await page.locator('[data-testid=task-input-title]').inputValue(),
   ).toEqual(`New title ${now}`);
