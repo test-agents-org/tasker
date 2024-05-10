@@ -2,8 +2,9 @@ import { expect, test } from '@playwright/test';
 import { login } from './helpers/auth-helper';
 import { waitForToastHidden } from './helpers/toast-helper';
 import { createTask } from './helpers/task-helper';
+import { format } from 'date-fns';
 
-test('Tasks Test: Page', async ({ page }) => {
+test('Tasks Test: List page', async ({ page }) => {
   await login(page);
   await page.goto('/tasks');
 
@@ -64,4 +65,36 @@ test('Tasks Test: Add new task', async ({ page }) => {
   expect(
     taskItemTextContents.some((s) => s.match(`Test 4 ${now}`)),
   ).toBeTruthy();
+});
+
+test('Tasks Tests: Details page editing', async ({ page }) => {
+  const now = Date.now();
+  await login(page, { email: 'alice@tasker.io', password: '123456' });
+
+  await page.goto('/tasks/UX-1');
+
+  await page.fill('[data-testid=task-input-title]', `New title ${now}`);
+  await page.fill(
+    '[data-testid=task-input-description]',
+    `New description ${now}`,
+  );
+  await page.fill(
+    '[data-testid=task-input-dueAt]',
+    format(new Date(), 'yyyy-MM-dd'),
+  );
+
+  // Wait for data to update then reload
+  await page.waitForTimeout(20_000);
+  await page.reload();
+
+  await page.screenshot({ path: 'test.png' });
+  expect(
+    await page.locator('[data-testid=task-input-title]').inputValue(),
+  ).toEqual(`New title ${now}`);
+  expect(
+    await page.locator('[data-testid=task-input-description]').inputValue(),
+  ).toEqual(`New description ${now}`);
+  expect(
+    await page.locator('[data-testid=task-input-dueAt]').inputValue(),
+  ).toEqual(format(new Date(), 'yyyy-MM-dd'));
 });

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import type { User, Project } from '@tasker/database/model';
+import type { Project, User } from '@tasker/database/model';
 import {
   Button,
   Dialog,
@@ -27,6 +27,7 @@ interface CreateTaskButtonProps {
   me: { id: number };
   members: User[];
   projects: Project[];
+  defaultProject?: Project;
 }
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -121,7 +122,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                       </label>
                       <input
                         data-autofocus
-                        className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:focus:ring-gray-600"
+                        className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm"
                         data-testid="create-task-input-title"
                         id="title"
                         placeholder="Do something..."
@@ -137,7 +138,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                         Description
                       </label>
                       <textarea
-                        className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:focus:ring-gray-600"
+                        className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm"
                         data-testid="create-task-input-description"
                         id="description"
                         rows={10}
@@ -156,6 +157,7 @@ export function CreateTaskButton(props: CreateTaskButtonProps) {
                         id="project"
                         data-testid="create-task-input-project"
                         className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        defaultValue={props.defaultProject?.id ?? ''}
                       >
                         {props.projects.map((p) => (
                           <option key={p.id} value={p.id}>

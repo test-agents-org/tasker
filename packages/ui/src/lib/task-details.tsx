@@ -67,6 +67,7 @@ export function TaskDetails({ task, members, projects, me }: TaskDetailsProps) {
               title: evt.currentTarget.value || task.title,
             });
           }}
+          data-testid="task-input-title"
           id="title"
           className="w-full rounded border-2 border-white px-2 text-xl font-semibold outline-0 focus:border-indigo-500"
           defaultValue={task.title}
@@ -78,6 +79,7 @@ export function TaskDetails({ task, members, projects, me }: TaskDetailsProps) {
         </label>
         <Select
           required
+          data-testid="task-input-project"
           id="project"
           defaultValue={task.projectId as number}
           className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -101,6 +103,7 @@ export function TaskDetails({ task, members, projects, me }: TaskDetailsProps) {
         </label>
         <Select
           required
+          data-testid="task-input-assignee"
           id="assignee"
           defaultValue={task.AssigneesOnTasks[0]?.assigneeId as number}
           className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -127,6 +130,7 @@ export function TaskDetails({ task, members, projects, me }: TaskDetailsProps) {
         </label>
         <input
           className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          data-testid="task-input-dueAt"
           id="dueAt"
           type="date"
           defaultValue={
@@ -147,7 +151,8 @@ export function TaskDetails({ task, members, projects, me }: TaskDetailsProps) {
         </label>
         <Select
           required
-          id="project"
+          data-testid="task-input-status"
+          id="status"
           defaultValue={task.status as string}
           className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           onChange={async (evt: SyntheticEvent<HTMLSelectElement>) => {
@@ -167,6 +172,7 @@ export function TaskDetails({ task, members, projects, me }: TaskDetailsProps) {
           Description
         </label>
         <textarea
+          data-testid="task-input-description"
           id="description"
           className="text-md mb-6 h-[500px] w-full rounded border-2 border-white px-2 outline-0 focus:border-indigo-500"
           defaultValue={task.description as string}

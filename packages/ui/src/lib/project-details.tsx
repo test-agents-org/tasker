@@ -24,6 +24,7 @@ export function ProjectDetails({
         <ProjectIndicator project={project} />
         <div className="flex flex-1 justify-end">
           <Select
+            data-testid="project-input-status"
             defaultValue={project.status}
             className="block rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             onChange={async (evt: SyntheticEvent<HTMLSelectElement>) => {

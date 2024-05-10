@@ -4,6 +4,7 @@ import { createTask } from './helpers/task-helper';
 
 test('Projects Tests: List page', async ({ page }) => {
   await login(page, { email: 'alice@tasker.io', password: '123456' });
+
   await page.goto('/projects');
 
   const projectCount = await page.locator('[data-testid=project-item]').count();
