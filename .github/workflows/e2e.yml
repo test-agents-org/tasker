@@ -23,11 +23,15 @@ jobs:
         run: pnpm install
       - name: Install Playwright Browsers
         run: pnpm --filter "@tasker/e2e-web" exec playwright install --with-deps
+      - name: Build Application
+        run: pnpm --filter "@tasker/web" build
+      - name: Seed Database
+        run: pnpm --filter "@tasker/database" seed
       - name: Run Playwright tests
         run: pnpm --filter "@tasker/e2e-web" test
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
-          path: playwright-report/
+          path: e2e/web/playwright-report/
           retention-days: 30

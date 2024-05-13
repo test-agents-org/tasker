@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "format": "prisma format",
     "postinstall": "prisma generate",
-    "reset": "prisma db push --force-reset && prisma db seed"
+    "format": "prisma format",
+    "seed": "prisma db push && prisma db seed"
   },
   "prisma": {
     "seed": "ts-node scripts/seed.ts"

@@ -33,8 +33,7 @@ export default defineConfig({
 
   webServer: {
     timeout: 120_000,
-    command:
-      'pnpm --filter "@tasker/database" reset && pnpm --filter "@tasker/web" build && pnpm --filter "@tasker/web" start',
+    command: 'pnpm --filter "@tasker/web" start',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
   },
