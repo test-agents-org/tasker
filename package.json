@@ -2,7 +2,9 @@
   "name": "@tasker/sources",
   "private": true,
   "scripts": {
-    "format": "prettier --write \"**/*.{js,ts,tsx,md}\""
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,tsx,md}\""
   },
   "devDependencies": {
     "@eslint/js": "^9.2.0",
