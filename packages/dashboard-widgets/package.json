@@ -2,11 +2,13 @@
   "name": "@tasker/dashboard-widgets",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "exports": {
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",

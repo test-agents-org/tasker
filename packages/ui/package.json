@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",
     "./project": "./src/project.tsx",
@@ -12,7 +11,8 @@
     "./toast": "./src/toast.tsx"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest"
   },
   "dependencies": {
     "@headlessui/react": "^2.0.3",
