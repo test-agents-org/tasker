@@ -1,15 +1,16 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
+const globals =require("globals");
+const pluginJs =require( "@eslint/js");
+const tseslint =require( "typescript-eslint");
+const pluginReactConfig =require( "eslint-plugin-react/configs/recommended.js");
 
-export default [
+module.exports = [
   {languageOptions: { globals: {...globals.browser, ...globals.node} }},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReactConfig,
   {
     ignores: [
+      'eslint.config.js',
       '**/.next/**/*',
       '**/postcss.config.js',
       'packages/database/scripts/seed.ts',
