@@ -8,8 +8,8 @@ export const config = {
 
 export async function middleware(req: NextRequest) {
   // validate the user is authenticated
-  const verifiedToken = await verifyAuth(req).catch((err) => {
-    console.error(err.message);
+  const verifiedToken = await verifyAuth(req).catch(() => {
+    return null;
   });
 
   if (!verifiedToken) {
