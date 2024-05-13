@@ -12,8 +12,7 @@ export default defineConfig({
   workers: 1,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
+    baseURL: 'http://[::1]:3000',
   },
 
   projects: [
@@ -34,7 +33,7 @@ export default defineConfig({
   webServer: {
     timeout: 120_000,
     command: 'pnpm --filter "@tasker/web" start',
-    url: 'http://localhost:3000',
+    url: 'http://[::1]:3000',
     reuseExistingServer: true,
   },
 });

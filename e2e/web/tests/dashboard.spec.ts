@@ -12,6 +12,7 @@ test('Dashboard Test: Title', async ({ page }) => {
 test('Dashboard Test: Add new task', async ({ page }) => {
   const now = Date.now();
   await login(page, { email: 'alice@tasker.io', password: '123456' });
+  await page.screenshot({ path: 'test-results/img.png' });
   await page.goto('/dashboard');
 
   const tasks = page.locator('[data-testid=task-item]');

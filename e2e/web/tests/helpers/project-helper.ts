@@ -5,7 +5,7 @@ export async function setStatus(page: Page, status: string) {
   const statusOptions = page.locator(
     '[data-testid=project-input-status] option',
   );
-  let selectedStatus: string;
+  let selectedStatus: string | null;
   for (let i = 0; i < (await statusOptions.count()); i++) {
     const value = await statusOptions.nth(i).getAttribute('value');
 
@@ -13,5 +13,5 @@ export async function setStatus(page: Page, status: string) {
       selectedStatus = await statusOptions.nth(i).getAttribute('value');
     }
   }
-  await select.selectOption(selectedStatus);
+  await select.selectOption(selectedStatus!);
 }

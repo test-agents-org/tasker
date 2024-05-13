@@ -34,15 +34,15 @@ export async function createTask(
     const projectOptions = page.locator(
       '[data-testid=create-task-input-project] option',
     );
-    let selectedProject: string;
+    let selectedProject: string | null;
     for (let i = 0; i < (await projectOptions.count()); i++) {
       const text = await projectOptions.nth(i).textContent();
 
-      if (text.match(data.project)) {
+      if (text?.match(data.project)) {
         selectedProject = await projectOptions.nth(i).getAttribute('value');
       }
     }
-    await project.selectOption(selectedProject);
+    await project.selectOption(selectedProject!);
   }
 
   const assignee = page.locator('[data-testid=create-task-input-assignee]');
@@ -50,18 +50,18 @@ export async function createTask(
     '[data-testid=create-task-input-assignee] option',
   );
 
-  let selectedAssignee: string;
+  let selectedAssignee: string | null;
   for (let i = 0; i < (await assigneeOptions.count()); i++) {
     const text = await assigneeOptions.nth(i).textContent();
 
     if (
-      (data.assignToMe && text.match(/Alice/)) ||
-      (!data.assignToMe && !text.match(/Alice/))
+      (data.assignToMe && text?.match(/Alice/)) ||
+      (!data.assignToMe && !text?.match(/Alice/))
     ) {
       selectedAssignee = await assigneeOptions.nth(i).getAttribute('value');
     }
   }
-  await assignee.selectOption(selectedAssignee);
+  await assignee.selectOption(selectedAssignee!);
 
   await page.click('[data-testid=create-task-submit]');
 
