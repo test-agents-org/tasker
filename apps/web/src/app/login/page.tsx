@@ -1,7 +1,6 @@
 'use client';
 
 import { JSX, FormEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useToast } from '@tasker/ui/toast';
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -13,7 +12,6 @@ interface EmailAndPasswordFormElement extends HTMLFormElement {
 }
 
 export default function Login(): JSX.Element {
-  const router = useRouter();
   const toast = useToast();
   const [failed, setFailed] = useState(false);
   const handleSubmit = async (evt: FormEvent<EmailAndPasswordFormElement>) => {

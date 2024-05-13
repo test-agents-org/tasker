@@ -29,7 +29,7 @@ export interface UpdateTaskData {
   dueAt?: null | string;
 }
 
-export function TaskDetails({ task, members, projects, me }: TaskDetailsProps) {
+export function TaskDetails({ task, members, projects }: TaskDetailsProps) {
   const router = useRouter();
   const [saveState, setSaveState] = useState<'saved' | 'pending' | 'idle'>(
     'idle',
