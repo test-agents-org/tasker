@@ -36,13 +36,14 @@ export default async function Tasks(): Promise<JSX.Element> {
       },
     ],
   });
+  const projects = await db.project.findMany();
   return (
     <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
       <div className="bg-white text-gray-900">
-        <MyTasks tasks={myTasks} />
+        <MyTasks tasks={myTasks} projects={projects} />
       </div>
       <div className="bg-white text-gray-900">
-        <CreatedTasks tasks={createdTasks} />
+        <CreatedTasks tasks={createdTasks} projects={projects} />
       </div>
     </div>
   );

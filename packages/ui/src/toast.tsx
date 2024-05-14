@@ -37,7 +37,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     setValue({ visible: true, message, type: 'error' });
   useEffect(() => {
     if (value.visible) {
-      setTimeout(() => setValue({ visible: false }), 5000);
+      setTimeout(() => setValue({ visible: false }), 2000);
     }
   }, [value]);
   return (

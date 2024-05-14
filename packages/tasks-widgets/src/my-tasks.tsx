@@ -1,8 +1,9 @@
-import type { Task } from '@tasker/database/model';
+import type { Project, Task } from '@tasker/database/model';
 import { TaskItem } from '@tasker/ui/task';
 
 interface MyTasksProps {
   tasks: Task[];
+  projects: Project[];
 }
 
 export function MyTasks(props: MyTasksProps) {

@@ -1,9 +1,10 @@
-import { Task } from '@tasker/database/model';
+import { Project, Task } from '@tasker/database/model';
 import Link from 'next/link';
 import { TaskIndicator } from '@tasker/ui/task';
 
 interface CreatedTasksProps {
   tasks: Task[];
+  projects: Project[];
 }
 
 export function CreatedTasks(props: CreatedTasksProps) {
