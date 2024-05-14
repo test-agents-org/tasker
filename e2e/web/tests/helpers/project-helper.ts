@@ -15,5 +15,5 @@ export async function setStatus(page: Page, status: string) {
   }
   await select.selectOption(selectedStatus!);
 
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(process.env.CI ? 5000 : 500);
 }

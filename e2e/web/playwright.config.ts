@@ -4,7 +4,8 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: process.env.CI ? 120_000 : 60_000,
+  globalSetup: require.resolve('./global-setup'),
+  timeout: process.env.CI ? 120_000 : 10_000,
   outputDir: 'test-results',
   testDir: './tests',
   forbidOnly: !!process.env.CI,
@@ -31,7 +32,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    timeout: 120_000,
+    timeout: 30_000,
     command: 'pnpm --filter "@tasker/web" start',
     url: 'http://[::1]:3000',
     reuseExistingServer: true,

@@ -104,7 +104,7 @@ test('Tasks Tests: Details page editing', async ({ page }) => {
   const taskCount = await tasks.count();
   const lastTask = tasks.nth(taskCount - 1);
   await lastTask.click();
-  await page.waitForTimeout(10_000);
+  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
 
   await page.fill('[data-testid=task-input-title]', `New title ${now}`);
   await page.fill(
@@ -117,7 +117,7 @@ test('Tasks Tests: Details page editing', async ({ page }) => {
   );
 
   // Wait for data to update then reload
-  await page.waitForTimeout(10_000);
+  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
   await page.reload();
 
   expect(
@@ -151,14 +151,14 @@ test('Tasks Test: Delete tasks', async ({ page }) => {
     assignToMe: true,
   });
 
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(process.env.CI ? 2000 : 200);
 
   while ((await tasks.count()) > 0) {
     // Go to details view
     await tasks.first().click();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(process.env.CI ? 1000 : 100);
     await page.click(`[data-testid=task-delete]`);
     // Back in project page
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(process.env.CI ? 1000 : 100);
   }
 });

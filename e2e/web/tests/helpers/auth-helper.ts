@@ -9,7 +9,7 @@ export async function login(
   await page.fill('[data-testid=email]', creds.email);
   await page.fill('[data-testid=password]', creds.password);
 
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(process.env.CI ? 5000 : 500);
 
   await page.click('[data-testid=submit]');
 
