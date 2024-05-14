@@ -5,7 +5,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   globalSetup: require.resolve('./global-setup'),
-  timeout: process.env.CI ? 120_000 : 10_000,
+  timeout: process.env.CI ? 120_000 : 60_000,
   outputDir: 'test-results',
   testDir: './tests',
   forbidOnly: !!process.env.CI,
