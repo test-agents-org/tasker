@@ -29,8 +29,6 @@ jobs:
           pnpm lint
           pnpm --filter "@tasker/web" build
           pnpm --filter "@tasker/*" test
-      - name: Seed Database
-        run: pnpm --filter "@tasker/database" seed
       - name: Run Playwright tests
         run: pnpm --filter "@tasker/e2e-web" e2e
       - uses: actions/upload-artifact@v4
