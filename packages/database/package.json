@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "prisma generate",
     "format": "prisma format",
-    "seed": "prisma db push && prisma db seed"
+    "db:seed": "prisma db push --force-reset && prisma db seed"
   },
   "prisma": {
     "seed": "ts-node scripts/seed.ts"

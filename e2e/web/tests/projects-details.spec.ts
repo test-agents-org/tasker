@@ -94,7 +94,7 @@ test('Projects Tests: Update project status', async ({ page }) => {
 
   await setStatus(page, 'off_track');
 
-  await page.waitForTimeout(process.env.CI ? 10_000 : 5000);
+  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
   await page.reload();
 
   expect(
@@ -103,7 +103,7 @@ test('Projects Tests: Update project status', async ({ page }) => {
 
   await setStatus(page, 'on_track');
 
-  await page.waitForTimeout(process.env.CI ? 10_000 : 5000);
+  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
   await page.reload();
 
   expect(
@@ -119,7 +119,7 @@ test('Projects Tests: Update project status', async ({ page }) => {
 
   await setStatus(page, 'off_track');
 
-  await page.waitForTimeout(process.env.CI ? 10_000 : 5000);
+  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
   await page.reload();
 
   expect(
@@ -128,7 +128,7 @@ test('Projects Tests: Update project status', async ({ page }) => {
 
   await setStatus(page, 'at_risk');
 
-  await page.waitForTimeout(process.env.CI ? 10_000 : 5000);
+  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
   await page.reload();
 
   expect(
@@ -137,7 +137,7 @@ test('Projects Tests: Update project status', async ({ page }) => {
 
   await setStatus(page, 'on_track');
 
-  await page.waitForTimeout(process.env.CI ? 10_000 : 5000);
+  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
   await page.reload();
 
   expect(
