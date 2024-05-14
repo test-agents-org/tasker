@@ -21,6 +21,12 @@ test('Projects Tests: Details page', async ({ page }) => {
     assignToMe: true,
   });
   await createTask(page, {
+    title: `Engineering task #3 ${now}`,
+    description: `Description ${now}`,
+    project: 'Engineering',
+    assignToMe: true,
+  });
+  await createTask(page, {
     title: `Design task #1 ${now}`,
     description: `Description ${now}`,
     project: 'Design',
@@ -28,6 +34,12 @@ test('Projects Tests: Details page', async ({ page }) => {
   });
   await createTask(page, {
     title: `Design task #2 ${now}`,
+    description: `Description ${now}`,
+    project: 'Design',
+    assignToMe: false,
+  });
+  await createTask(page, {
+    title: `Design task #3 ${now}`,
     description: `Description ${now}`,
     project: 'Design',
     assignToMe: false,
@@ -46,6 +58,9 @@ test('Projects Tests: Details page', async ({ page }) => {
   expect(
     taskItemTextContents.some((s) => s.match(`Engineering task #2 ${now}`)),
   ).toBeTruthy();
+  expect(
+    taskItemTextContents.some((s) => s.match(`Engineering task #3 ${now}`)),
+  ).toBeTruthy();
 
   await page.goto('/projects/UX');
 
@@ -58,6 +73,9 @@ test('Projects Tests: Details page', async ({ page }) => {
   ).toBeTruthy();
   expect(
     taskItemTextContents.some((s) => s.match(`Design task #2 ${now}`)),
+  ).toBeTruthy();
+  expect(
+    taskItemTextContents.some((s) => s.match(`Design task #3 ${now}`)),
   ).toBeTruthy();
 });
 
