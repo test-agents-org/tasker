@@ -151,10 +151,14 @@ test('Tasks Test: Delete tasks', async ({ page }) => {
     assignToMe: true,
   });
 
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(2000);
 
   while ((await tasks.count()) > 0) {
+    // Go to details view
+    await tasks.first().click();
+    await page.waitForTimeout(1000);
     await page.click(`[data-testid=task-delete]`);
-    await page.waitForTimeout(5000);
+    // Back in project page
+    await page.waitForTimeout(1000);
   }
 });
