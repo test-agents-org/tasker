@@ -21,17 +21,17 @@ export async function PUT(
       AssigneesOnTasks: true,
     },
   });
-  if (task.AssigneesOnTasks[0]) {
-    await db.assigneesOnTasks.delete({
-      where: {
-        taskId_assigneeId: {
-          taskId: task.id,
-          assigneeId: task.AssigneesOnTasks[0].assigneeId,
+  if (typeof assigneeId !== 'undefined') {
+    if (task.AssigneesOnTasks[0]) {
+      await db.assigneesOnTasks.delete({
+        where: {
+          taskId_assigneeId: {
+            taskId: task.id,
+            assigneeId: task.AssigneesOnTasks[0].assigneeId,
+          },
         },
-      },
-    });
-  }
-  if (assigneeId) {
+      });
+    }
     await db.assigneesOnTasks.create({
       data: {
         taskId: task.id,

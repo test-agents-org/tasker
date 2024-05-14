@@ -47,9 +47,9 @@ export function TaskDetails({ task, members, projects }: TaskDetailsProps) {
         body: JSON.stringify(data),
       });
       setSaveState('saved');
-      await new Promise((res) => setTimeout(res, 3000));
-      setSaveState('idle');
       router.refresh();
+      await new Promise((res) => setTimeout(res, 2000));
+      setSaveState('idle');
     } catch (err) {
       console.error(err);
       setSaveState('idle');
@@ -64,7 +64,6 @@ export function TaskDetails({ task, members, projects }: TaskDetailsProps) {
     if (resp.status >= 400) {
       toast.error(`Failed to delete task`);
     } else {
-      console.log(resp);
       router.replace(`/projects/${project!.slug}`);
       router.refresh();
       toast.success('Successfully deleted task');

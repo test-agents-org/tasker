@@ -1,4 +1,4 @@
-import { subWeeks } from 'date-fns';
+import { addDays, subWeeks } from 'date-fns';
 import React, { JSX } from 'react';
 import {
   ProjectsStatuses,
@@ -24,20 +24,25 @@ export default async function Page(): Promise<JSX.Element> {
       Task: true,
     },
   });
-  const assignedTaskIds = (
+  const tasks = (
     await db.assigneesOnTasks.findMany({
       where: {
         assigneeId: userData.id,
+        task: {
+          dueAt: { lte: addDays(new Date(), 7) },
+          deleted: false,
+        },
+      },
+      orderBy: {
+        task: {
+          createdAt: 'asc',
+        },
+      },
+      include: {
+        task: {},
       },
     })
-  ).map((a) => a.taskId);
-  const tasks = await db.task.findMany({
-    where: {
-      deleted: false,
-      id: { in: assignedTaskIds },
-      dueAt: { gte: subWeeks(new Date(), 1) },
-    },
-  });
+  ).map((x) => x.task);
   return (
     <div className="flex h-screen w-full">
       <div className="flex w-64 flex-col items-start justify-between border-r bg-white p-8">

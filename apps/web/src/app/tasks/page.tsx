@@ -15,8 +15,13 @@ export default async function Tasks(): Promise<JSX.Element> {
           deleted: false,
         },
       },
+      orderBy: {
+        task: {
+          createdAt: 'asc',
+        },
+      },
       include: {
-        task: true,
+        task: {},
       },
     })
   ).map((x) => x.task);
@@ -25,6 +30,11 @@ export default async function Tasks(): Promise<JSX.Element> {
       deleted: false,
       userId: userData.id,
     },
+    orderBy: [
+      {
+        createdAt: 'desc',
+      },
+    ],
   });
   return (
     <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
