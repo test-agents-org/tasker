@@ -8,11 +8,11 @@ generator client {
 }
 
 model Project {
-  id   Int    @id @default(autoincrement())
-  slug String @unique
-  name String
+  id     Int    @id @default(autoincrement())
+  slug   String @unique
+  name   String
   status String @default("on_track")
-  Task Task[]
+  Task   Task[]
 }
 
 model Task {
@@ -23,6 +23,7 @@ model Task {
   createdAt        DateTime           @default(now())
   dueAt            DateTime?
   status           String             @default("backlog")
+  deleted          Boolean            @default(false)
   Project          Project?           @relation(fields: [projectId], references: [id])
   projectId        Int?
   User             User?              @relation(fields: [userId], references: [id])

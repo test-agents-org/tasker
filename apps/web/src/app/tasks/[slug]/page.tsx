@@ -11,7 +11,7 @@ export default async function TaskDetailsPage({
   params: { slug: string };
 }): Promise<JSX.Element> {
   const task = await db.task.findUnique({
-    where: { slug: params.slug },
+    where: { slug: params.slug, deleted: false },
     include: {
       AssigneesOnTasks: true,
     },

@@ -2,6 +2,7 @@
 
 import { JSX, FormEvent, useState } from 'react';
 import { useToast } from '@tasker/ui/toast';
+import { useRouter } from 'next/navigation';
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -12,6 +13,7 @@ interface EmailAndPasswordFormElement extends HTMLFormElement {
 }
 
 export default function Login(): JSX.Element {
+  const router = useRouter();
   const toast = useToast();
   const [failed, setFailed] = useState(false);
   const handleSubmit = async (evt: FormEvent<EmailAndPasswordFormElement>) => {
@@ -28,7 +30,8 @@ export default function Login(): JSX.Element {
         setFailed(true);
       } else {
         toast.success('Successfully signed in');
-        window.location.replace('/dashboard');
+        router.replace('/dashboard');
+        router.refresh();
       }
     } catch (err) {
       console.error(err);
@@ -37,11 +40,11 @@ export default function Login(): JSX.Element {
   };
 
   return (
-    <div className="flex min-h-[100dvh] items-center justify-center bg-gray-100 px-4 dark:bg-gray-950">
-      <div className="w-full max-w-md space-y-4 rounded-lg bg-white p-6 shadow-lg dark:bg-gray-900">
+    <div className="flex min-h-[100dvh] items-center justify-center bg-gray-100 px-4">
+      <div className="w-full max-w-md space-y-4 rounded-lg bg-white p-6 shadow-lg">
         <div className="space-y-2">
           <h2 className="text-2xl font-bold">Welcome back</h2>
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-gray-500">
             Enter your email and password to sign in.
           </p>
         </div>
@@ -52,7 +55,7 @@ export default function Login(): JSX.Element {
             </label>
             <input
               autoFocus
-              className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:focus:ring-gray-600"
+              className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm"
               data-testid="email"
               id="email"
               placeholder="user@example.com"
@@ -67,7 +70,7 @@ export default function Login(): JSX.Element {
               </label>
             </div>
             <input
-              className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:focus:ring-gray-600"
+              className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm"
               data-testid="password"
               id="password"
               required
@@ -84,7 +87,7 @@ export default function Login(): JSX.Element {
           ) : null}
           <button
             data-testid="submit"
-            className="w-full rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-100 dark:focus:ring-offset-gray-950"
+            className="w-full rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2"
             type="submit"
           >
             Sign in

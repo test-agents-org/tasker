@@ -7,10 +7,11 @@ import type {
 } from '@tasker/database/model';
 import { Select } from '@headlessui/react';
 import { SyntheticEvent, useState } from 'react';
-import { CloudArrowUpIcon } from '@heroicons/react/24/solid';
+import { CloudArrowUpIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { TaskIndicator } from './task-item';
+import { useToast } from '../toast';
 
 interface TaskDetailsProps {
   task: TaskWithAssigneesOnTasks;
@@ -30,39 +31,67 @@ export interface UpdateTaskData {
 }
 
 export function TaskDetails({ task, members, projects }: TaskDetailsProps) {
+  const toast = useToast();
   const router = useRouter();
   const [saveState, setSaveState] = useState<'saved' | 'pending' | 'idle'>(
     'idle',
   );
 
-  async function update(data: UpdateTaskData): Promise<void> {
-    setSaveState('pending');
-    await fetch(`/api/tasks/${data.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
+  const project = projects.find((p) => p.id === task.projectId);
+
+  async function updateTask(data: UpdateTaskData): Promise<void> {
+    try {
+      setSaveState('pending');
+      await fetch(`/api/tasks/${data.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+      });
+      setSaveState('saved');
+      await new Promise((res) => setTimeout(res, 3000));
+      setSaveState('idle');
+      router.refresh();
+    } catch (err) {
+      console.error(err);
+      setSaveState('idle');
+      toast.error(`Failed to update task`);
+    }
+  }
+
+  async function deleteTask(id: number): Promise<void> {
+    const resp = await fetch(`/api/tasks/${id}`, {
+      method: 'DELETE',
     });
-    setSaveState('saved');
-    await new Promise((res) => setTimeout(res, 3000));
-    setSaveState('idle');
-    router.refresh();
+    if (resp.status >= 400) {
+      toast.error(`Failed to delete task`);
+    } else {
+      console.log(resp);
+      router.replace(`/projects/${project!.slug}`);
+      router.refresh();
+      toast.success('Successfully deleted task');
+    }
   }
 
   return (
     <>
       <div className="relative mb-2">
-        <div className="absolute right-0 top-0">
+        <div className="absolute right-0 top-0 flex gap-2">
           {saveState === 'pending' ? (
             <CloudArrowUpIcon className="h-5 w-5 text-gray-900" />
           ) : (
             <CloudArrowUpIcon className="h-5 w-5 text-gray-300" />
           )}
+          <TrashIcon
+            data-testid="task-delete"
+            className="h-5 w-5 cursor-pointer text-red-800 hover:text-red-500"
+            onClick={() => deleteTask(task.id)}
+          />
         </div>
         <label className="block py-2 font-medium" htmlFor="title">
           Title
         </label>
         <input
           onChange={async (evt: SyntheticEvent<HTMLInputElement>) => {
-            await update({
+            await updateTask({
               id: task.id,
               title: evt.currentTarget.value || task.title,
             });
@@ -84,7 +113,7 @@ export function TaskDetails({ task, members, projects }: TaskDetailsProps) {
           defaultValue={task.projectId as number}
           className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           onChange={async (evt: SyntheticEvent<HTMLSelectElement>) => {
-            await update({
+            await updateTask({
               id: task.id,
               projectId: parseInt(evt.currentTarget.value) || task.projectId,
             });
@@ -108,7 +137,7 @@ export function TaskDetails({ task, members, projects }: TaskDetailsProps) {
           defaultValue={task.AssigneesOnTasks[0]?.assigneeId as number}
           className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           onChange={async (evt: SyntheticEvent<HTMLSelectElement>) => {
-            await update({
+            await updateTask({
               id: task.id,
               assigneeId: evt.currentTarget.value
                 ? parseInt(evt.currentTarget.value)
@@ -137,7 +166,7 @@ export function TaskDetails({ task, members, projects }: TaskDetailsProps) {
             task.dueAt ? format(new Date(task.dueAt), 'yyyy-MM-dd') : ''
           }
           onChange={async (evt: SyntheticEvent<HTMLInputElement>) => {
-            await update({
+            await updateTask({
               id: task.id,
               dueAt: evt.currentTarget.value,
             });
@@ -156,7 +185,7 @@ export function TaskDetails({ task, members, projects }: TaskDetailsProps) {
           defaultValue={task.status as string}
           className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           onChange={async (evt: SyntheticEvent<HTMLSelectElement>) => {
-            await update({
+            await updateTask({
               id: task.id,
               status: evt.currentTarget.value,
             });
@@ -177,7 +206,7 @@ export function TaskDetails({ task, members, projects }: TaskDetailsProps) {
           className="text-md mb-6 h-[500px] w-full rounded border-2 border-white px-2 outline-0 focus:border-indigo-500"
           defaultValue={task.description as string}
           onChange={async (evt: SyntheticEvent<HTMLTextAreaElement>) => {
-            await update({
+            await updateTask({
               id: task.id,
               description: evt.currentTarget.value,
             });

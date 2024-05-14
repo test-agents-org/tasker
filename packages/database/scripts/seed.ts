@@ -53,6 +53,7 @@ async function main() {
     create: {
       slug: 'UX-1',
       title: 'Wireframing',
+      description: `This task is to create the initial wireframe for the landing page`,
       createdAt: subDays(new Date(), 13),
       dueAt: addDays(new Date(), 4),
       status: 'backlog',
@@ -67,6 +68,7 @@ async function main() {
     create: {
       slug: 'UX-2',
       title: 'Customer Journey Mapping',
+      description: `This task is to create the customer journey for the onboarding process.`,
       createdAt: subDays(new Date(), 5),
       dueAt: addDays(new Date(), 8),
       status: 'backlog',
@@ -81,6 +83,7 @@ async function main() {
     create: {
       slug: 'ENG-1',
       title: 'Landing page',
+      description: `This task is to code the landing page based on the wireframe.`,
       createdAt: subDays(new Date(), 5),
       dueAt: addDays(new Date(), 1),
       status: 'backlog',
@@ -95,6 +98,7 @@ async function main() {
     create: {
       slug: 'ENG-2',
       title: 'Secondary page',
+      description: `This task is to create the second page as a part of the onboarding process.`,
       createdAt: subDays(new Date(), 14),
       dueAt: addDays(new Date(), 0),
       status: 'backlog',

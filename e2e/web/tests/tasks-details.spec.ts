@@ -130,3 +130,31 @@ test('Tasks Tests: Details page editing', async ({ page }) => {
     await page.locator('[data-testid=task-input-dueAt]').inputValue(),
   ).toEqual(format(new Date(), 'yyyy-MM-dd'));
 });
+
+test('Tasks Test: Delete tasks', async ({ page }) => {
+  const now = Date.now();
+  await login(page, { email: 'alice@tasker.io', password: '123456' });
+  await page.goto('/tasks');
+
+  const tasks = page.locator('[data-testid=task-item]');
+
+  await createTask(page, {
+    title: `Test 1 ${now}`,
+    description: `Test ${now}`,
+    project: 'Engineering',
+    assignToMe: true,
+  });
+  await createTask(page, {
+    title: `Test 2 ${now}`,
+    description: `Test ${now}`,
+    project: 'Engineering',
+    assignToMe: true,
+  });
+
+  await page.waitForTimeout(5000);
+
+  while ((await tasks.count()) > 0) {
+    await page.click(`[data-testid=task-delete]`);
+    await page.waitForTimeout(5000);
+  }
+});

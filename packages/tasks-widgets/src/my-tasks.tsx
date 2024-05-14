@@ -10,11 +10,15 @@ export function MyTasks(props: MyTasksProps) {
     <>
       <h3 className="mb-4 text-lg font-semibold">My Tasks</h3>
       <p className="mb-4 text-sm text-gray-500">Tasks assigned to you</p>
-      <div className="grid gap-4" data-testid="my-tasks">
-        {props.tasks.map((t) => (
-          <TaskItem key={t.id} task={t} />
-        ))}
-      </div>
+      {props.tasks.length > 0 ? (
+        <div className="grid gap-4" data-testid="my-tasks">
+          {props.tasks.map((t) => (
+            <TaskItem key={t.id} task={t} />
+          ))}
+        </div>
+      ) : (
+        <p className="text-gray-500">No tasks assigned</p>
+      )}
     </>
   );
 }

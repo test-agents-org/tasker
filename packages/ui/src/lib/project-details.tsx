@@ -45,9 +45,11 @@ export function ProjectDetails({
       </div>
       <h3 className="my-4">Tasks</h3>
       <div className="flex flex-col gap-4">
-        {tasks.map((t) => (
-          <TaskItem key={t.id} task={t} />
-        ))}
+        {tasks.length > 0 ? (
+          tasks.map((t) => <TaskItem key={t.id} task={t} />)
+        ) : (
+          <p className="text-gray-500">No tasks found</p>
+        )}
       </div>
     </>
   );

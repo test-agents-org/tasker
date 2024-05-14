@@ -4,8 +4,6 @@ import { CreatedTasks, MyTasks } from '@tasker/tasks-widgets';
 import { db } from '@tasker/database';
 import { getUserData } from '../api/auth/utils';
 
-export const revalidate = 0;
-
 export default async function Tasks(): Promise<JSX.Element> {
   const cookieStore = cookies();
   const userData = getUserData(cookieStore);
@@ -13,6 +11,9 @@ export default async function Tasks(): Promise<JSX.Element> {
     await db.assigneesOnTasks.findMany({
       where: {
         assigneeId: userData.id,
+        task: {
+          deleted: false,
+        },
       },
       include: {
         task: true,
@@ -21,6 +22,7 @@ export default async function Tasks(): Promise<JSX.Element> {
   ).map((x) => x.task);
   const createdTasks = await db.task.findMany({
     where: {
+      deleted: false,
       userId: userData.id,
     },
   });

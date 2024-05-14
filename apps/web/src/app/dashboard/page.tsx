@@ -33,6 +33,7 @@ export default async function Page(): Promise<JSX.Element> {
   ).map((a) => a.taskId);
   const tasks = await db.task.findMany({
     where: {
+      deleted: false,
       id: { in: assignedTaskIds },
       dueAt: { gte: subWeeks(new Date(), 1) },
     },

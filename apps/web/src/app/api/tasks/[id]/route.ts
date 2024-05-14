@@ -9,7 +9,7 @@ export async function PUT(
   const { status, title, dueAt, description, assigneeId, projectId } =
     await req.json();
   const task = await db.task.update({
-    where: { id: parseInt(params.id) },
+    where: { id: parseInt(params.id), deleted: false },
     data: {
       status,
       title,
@@ -40,4 +40,17 @@ export async function PUT(
     });
   }
   return NextResponse.json(task);
+}
+
+export async function DELETE(
+  _req: Request,
+  { params }: { params: { id: string } },
+) {
+  await db.task.update({
+    where: { id: parseInt(params.id) },
+    data: { deleted: true },
+  });
+  return new Response(null, {
+    status: 204,
+  });
 }

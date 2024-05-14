@@ -23,6 +23,7 @@ export default async function ProjectDetailsPage({
   const projects = await db.project.findMany();
   const tasks = await db.task.findMany({
     where: {
+      deleted: false,
       projectId: project.id,
     },
     include: {

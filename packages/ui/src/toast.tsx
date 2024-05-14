@@ -54,14 +54,17 @@ export function Toast(props: ToastData) {
       className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 transform"
       data-testid="toast"
     >
-      <div className="flex items-center rounded-md bg-green-500 px-4 py-3 text-white shadow-lg">
-        {props.type === 'success' ? (
-          <ExclamationCircleIcon className="mr-2 h-5 w-5" />
-        ) : (
+      {props.type === 'success' ? (
+        <div className="flex items-center rounded-md bg-green-500 px-4 py-3 text-white shadow-lg">
           <CheckCircleIcon className="mr-2 h-5 w-5" />
-        )}
-        <span>{props.message}</span>
-      </div>
+          <span>{props.message}</span>
+        </div>
+      ) : (
+        <div className="flex items-center rounded-md bg-red-500 px-4 py-3 text-white shadow-lg">
+          <ExclamationCircleIcon className="mr-2 h-5 w-5" />
+          <span>{props.message}</span>
+        </div>
+      )}
     </div>
   ) : null;
 }
