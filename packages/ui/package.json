@@ -11,8 +11,8 @@
     "./toast": "./src/toast.tsx"
   },
   "scripts": {
-    "lint": "eslint .",
-    "test": "vitest"
+    "lint": "nx eslint:lint",
+    "test": "nx vite:test"
   },
   "dependencies": {
     "@headlessui/react": "^2.0.3",
